@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Resume – Devamanohar K S | Java Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Print + Screen Styles ── */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --accent:  #4f46e5;
+      --accent2: #0891b2;
+      --text:    #1e293b;
+      --muted:   #64748b;
+      --border:  #e2e8f0;
+      --bg:      #f8fafc;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 13.5px;
+      line-height: 1.6;
+    }
+
+    /* ── Print Button (hidden on print) ── */
+    .print-bar {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: #1e1b4b;
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      z-index: 100;
+      gap: 16px;
+    }
+
+    .print-bar p {
+      color: #a5b4fc;
+      font-size: .9rem;
+    }
+
+    .print-bar strong { color: #fff; }
+
+    .btn-print {
+      background: linear-gradient(135deg, #6366f1, #06b6d4);
+      color: #fff;
+      border: none;
+      padding: 9px 22px;
+      border-radius: 8px;
+      font-size: .9rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      text-decoration: none;
+      transition: opacity .2s;
+    }
+
+    .btn-print:hover { opacity: .85; }
+
+    .btn-back {
+      background: transparent;
+      color: #a5b4fc;
+      border: 1.5px solid #4f46e5;
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-size: .88rem;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background .2s;
+    }
+
+    .btn-back:hover { background: rgba(99,102,241,.15); }
+
+    /* ── Resume Page ── */
+    .page {
+      max-width: 820px;
+      margin: 72px auto 40px;
+      background: #fff;
+      box-shadow: 0 4px 40px rgba(0,0,0,.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    /* Header */
+    .resume-header {
+      background: linear-gradient(135deg, #1e1b4b 0%, #0c4a6e 100%);
+      color: #fff;
+      padding: 36px 40px 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .resume-header::before {
+      content: '';
+      position: absolute;
+      right: -60px; top: -60px;
+      width: 240px; height: 240px;
+      border-radius: 50%;
+      background: rgba(99,102,241,.15);
+    }
+
+    .resume-header::after {
+      content: '';
+      position: absolute;
+      right: 40px; bottom: -40px;
+      width: 150px; height: 150px;
+      border-radius: 50%;
+      background: rgba(6,182,212,.1);
+    }
+
+    .header-name {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -.5px;
+      position: relative;
+    }
+
+    .header-title {
+      font-size: 1rem;
+      color: #a5b4fc;
+      font-weight: 500;
+      margin-top: 4px;
+      position: relative;
+    }
+
+    .header-contacts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px 28px;
+      margin-top: 20px;
+      position: relative;
+    }
+
+    .hc-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      font-size: .82rem;
+      color: #c7d2fe;
+    }
+
+    .hc-item a {
+      color: #c7d2fe;
+      text-decoration: none;
+    }
+
+    .hc-item a:hover { text-decoration: underline; }
+
+    /* Body */
+    .resume-body {
+      padding: 30px 40px 36px;
+      display: grid;
+      grid-template-columns: 1fr 0.85fr;
+      gap: 0 36px;
+    }
+
+    /* Sections */
+    .section-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--accent);
+      border-bottom: 1.5px solid var(--border);
+      padding-bottom: 6px;
+      margin-bottom: 14px;
+      margin-top: 22px;
+    }
+
+    .section-head:first-of-type { margin-top: 0; }
+
+    /* Objective */
+    .objective-text {
+      color: var(--muted);
+      font-size: .88rem;
+      line-height: 1.65;
+    }
+
+    /* Experience & Projects */
+    .entry { margin-bottom: 16px; }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 4px;
+    }
+
+    .entry-title {
+      font-size: .95rem;
+      font-weight: 700;
+    }
+
+    .entry-date {
+      font-size: .75rem;
+      color: var(--muted);
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+
+    .entry-sub {
+      font-size: .82rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .entry-sub .badge {
+      display: inline-block;
+      background: #ede9fe;
+      color: var(--accent);
+      border-radius: 4px;
+      font-size: .68rem;
+      font-weight: 700;
+      padding: 1px 7px;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .bullet-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .bullet-list li {
+      font-size: .84rem;
+      color: var(--muted);
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .bullet-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent2);
+      font-size: .7rem;
+      top: 1px;
+    }
+
+    /* Tech tags */
+    .tech-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 7px;
+    }
+
+    .tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      background: #f0f9ff;
+      color: var(--accent2);
+      border: 1px solid #bae6fd;
+      border-radius: 4px;
+      padding: 2px 8px;
+    }
+
+    /* Right column */
+    .right-col {}
+
+    /* Education */
+    .edu-item { margin-bottom: 14px; }
+
+    .edu-degree { font-size: .9rem; font-weight: 700; }
+    .edu-school { font-size: .8rem; color: var(--muted); margin: 2px 0; }
+    .edu-meta   { font-size: .75rem; color: var(--accent2); font-weight: 600; }
+
+    /* Skills */
+    .skill-group { margin-bottom: 10px; }
+
+    .skill-label {
+      font-size: .75rem;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      margin-bottom: 4px;
+    }
+
+    .skill-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .sp {
+      background: #f1f5f9;
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2px 9px;
+      font-size: .76rem;
+      color: var(--text);
+    }
+
+    .sp.java   { background: #fff1f0; border-color: #fca5a5; color: #b91c1c; }
+    .sp.spring { background: #f0fdf4; border-color: #86efac; color: #166534; }
+    .sp.aws    { background: #fffbeb; border-color: #fcd34d; color: #92400e; }
+    .sp.db     { background: #eff6ff; border-color: #93c5fd; color: #1e40af; }
+
+    /* Certifications */
+    .cert-item { margin-bottom: 10px; }
+    .cert-name  { font-size: .88rem; font-weight: 600; }
+    .cert-org   { font-size: .78rem; color: var(--accent); }
+    .cert-date  { font-size: .72rem; color: var(--muted); }
+
+    /* Achievements */
+    .ach-item {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }
+
+    .ach-icon { font-size: 1rem; flex-shrink: 0; }
+    .ach-text { font-size: .83rem; color: var(--muted); }
+    .ach-text strong { color: var(--text); }
+
+    /* Divider between columns */
+    .left-col {
+      border-right: 1px solid var(--border);
+      padding-right: 32px;
+    }
+
+    .right-col { padding-left: 4px; }
+
+    /* ── PRINT STYLES ── */
+    @media print {
+      body { background: #fff; font-size: 12px; }
+      .print-bar { display: none !important; }
+      .page {
+        margin: 0;
+        box-shadow: none;
+        border-radius: 0;
+        max-width: 100%;
+      }
+      .resume-header { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Print Bar (visible only on screen) -->
+  <div class="print-bar">
+    <p>📄 To save as PDF: click <strong>Print CV</strong> → choose <strong>"Save as PDF"</strong> as the printer.</p>
+    <div style="display:flex; gap:10px;">
+      <a href="index.html" class="btn-back">← Back to Portfolio</a>
+      <button onclick="window.print()" class="btn-print">
+        <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+        Print / Save as PDF
+      </button>
+    </div>
+  </div>
+
+  <!-- Resume Page -->
+  <div class="page">
+
+    <!-- Header -->
+    <div class="resume-header">
+      <div class="header-name">Devamanohar K S</div>
+      <div class="header-title">Java Developer · Spring Boot · AWS · Docker</div>
+      <div class="header-contacts">
+        <span class="hc-item">📞 <a href="tel:+919445926344">+91 9445926344</a></span>
+        <span class="hc-item">✉️ <a href="mailto:devamanohar06@gmail.com">devamanohar06@gmail.com</a></span>
+        <span class="hc-item">📍 Namakkal, Tamil Nadu</span>
+        <span class="hc-item">🔗 <a href="https://www.linkedin.com/in/devamanohar-k-s/" target="_blank">linkedin.com/in/devamanohar-k-s</a></span>
+        <span class="hc-item">🐙 <a href="https://github.com/Deva242006" target="_blank">github.com/Deva242006</a></span>
+        <span class="hc-item">💻 <a href="https://leetcode.com/u/Devamanohar_K_S/" target="_blank">leetcode.com/Devamanohar_K_S</a></span>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="resume-body">
+
+      <!-- LEFT COLUMN -->
+      <div class="left-col">
+
+        <!-- Objective -->
+        <div class="section-head">🎯 Career Objective</div>
+        <p class="objective-text">
+          Enthusiastic Computer Science graduate with practical knowledge of Java, Spring Boot, and SQL,
+          seeking a Java Developer position to build scalable, cloud-ready applications. Skilled in
+          Git/GitHub for collaborative development, Docker for containerization, and AWS for deployment,
+          with a strong eagerness to learn and deliver high-quality software solutions.
+        </p>
+
+        <!-- Experience -->
+        <div class="section-head">💼 Work Experience</div>
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Java Backend Intern</span>
+            <span class="entry-date">Mar 2026 – May 2026</span>
+          </div>
+          <div class="entry-sub">CODEC Technologies <span class="badge">Remote</span></div>
+          <ul class="bullet-list">
+            <li>Gained hands-on understanding of Spring Boot framework for building backend applications and REST APIs.</li>
+            <li>Improved problem-solving and self-learning skills by working independently in a remote environment.</li>
+          </ul>
+        </div>
+
+        <!-- Projects -->
+        <div class="section-head">🚀 Projects</div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Job Portal Backend Application</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Developed a backend application enabling CRUD operations for job postings, candidates, and employer profiles.</li>
+            <li>Designed RESTful APIs using Spring Boot for job creation, updates, application submissions, and deletions.</li>
+            <li>Designed relational database schema with one-to-many and many-to-many entity relationships.</li>
+          </ul>
+          <div class="tech-row">
+            <span class="tag">Java</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">Spring Security</span>
+            <span class="tag">SQL</span>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div class="entry-header">
+            <span class="entry-title">Student Management System</span>
+          </div>
+          <ul class="bullet-list">
+            <li>Built RESTful APIs to add, update, delete, and fetch student details like name, course, marks, and attendance.</li>
+            <li>Used JPA/Hibernate for seamless interaction between the Java application and the database.</li>
+            <li>Implemented basic authentication using Spring Security to restrict access to authorized users only.</li>
+          </ul>
+          <div class="tech-row">
+            <span class="tag">Java</span>
+            <span class="tag">Spring Boot</span>
+            <span class="tag">Hibernate/JPA</span>
+            <span class="tag">SQL</span>
+            <span class="tag">Spring Security</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="right-col">
+
+        <!-- Education -->
+        <div class="section-head">🎓 Education</div>
+
+        <div class="edu-item">
+          <div class="edu-degree">B.E. Computer Science Engineering</div>
+          <div class="edu-school">Nehru Institute of Technology (Autonomous) – Coimbatore</div>
+          <div class="edu-meta">Sep 2023 – May 2027 &nbsp;·&nbsp; CGPA: <strong>7.9</strong></div>
+        </div>
+
+        <div class="edu-item">
+          <div class="edu-degree">Higher Secondary Certificate (HSC)</div>
+          <div class="edu-school">Bharathiyar Matric. Higher Secondary School – Attur</div>
+          <div class="edu-meta">May 2023 &nbsp;·&nbsp; <strong>83.5%</strong></div>
+        </div>
+
+        <!-- Skills -->
+        <div class="section-head">🛠️ Technical Skills</div>
+
+        <div class="skill-group">
+          <div class="skill-label">Languages</div>
+          <div class="skill-pills">
+            <span class="sp java">Java</span>
+            <span class="sp">JavaScript</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Frameworks</div>
+          <div class="skill-pills">
+            <span class="sp spring">Spring Boot</span>
+            <span class="sp spring">Spring Security</span>
+            <span class="sp spring">Hibernate</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Web</div>
+          <div class="skill-pills">
+            <span class="sp">HTML</span>
+            <span class="sp">CSS</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Cloud / DevOps</div>
+          <div class="skill-pills">
+            <span class="sp aws">AWS EC2</span>
+            <span class="sp aws">AWS S3</span>
+            <span class="sp aws">Elastic Beanstalk</span>
+            <span class="sp">Docker</span>
+            <span class="sp">Git / GitHub</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Databases</div>
+          <div class="skill-pills">
+            <span class="sp db">MySQL</span>
+            <span class="sp db">PostgreSQL</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-label">Tools</div>
+          <div class="skill-pills">
+            <span class="sp">Maven</span>
+            <span class="sp">Postman</span>
+            <span class="sp">IntelliJ IDEA</span>
+            <span class="sp">VS Code</span>
+          </div>
+        </div>
+
+        <!-- Certifications -->
+        <div class="section-head">📜 Certifications</div>
+
+        <div class="cert-item">
+          <div class="cert-name">Java (Basic) Certification</div>
+          <div class="cert-org">HackerRank</div>
+          <div class="cert-date">Oct 2025</div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-name">SQL (Basic) Certification</div>
+          <div class="cert-org">HackerRank</div>
+          <div class="cert-date">Apr 2026</div>
+        </div>
+
+        <div class="cert-item">
+          <div class="cert-name">Pinnacle Hacks 2025 – Participant</div>
+          <div class="cert-org">24-hour AI Hackathon · NIT Coimbatore</div>
+          <div class="cert-date">Sep 2025</div>
+        </div>
+
+        <!-- Achievements -->
+        <div class="section-head">🏆 Achievements</div>
+
+        <div class="ach-item">
+          <span class="ach-icon">⭐</span>
+          <div class="ach-text"><strong>5-Star Java – HackerRank</strong><br />Demonstrates strong problem-solving and coding skills. (Sep 2025)</div>
+        </div>
+
+        <div class="ach-item">
+          <span class="ach-icon">🔥</span>
+          <div class="ach-text"><strong>100 Days LeetCode Badge</strong><br />Maintained consistent daily DSA practice streak. (Feb 2026)</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
